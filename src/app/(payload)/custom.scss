@@ -1,0 +1,28 @@
+/* Nicco Park admin touches: brand yellow for primary actions, and the ops dashboard. */
+:root {
+  --np-yellow: #ffd400;
+  --np-ink: #101418;
+}
+
+.np-ops {
+  padding: 24px 0 64px;
+  h1 { margin: 0 0 4px; }
+  h2 { font-size: 17px; margin: 0 0 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--theme-elevation-100); white-space: nowrap; }
+  th { font-weight: 600; opacity: 0.7; }
+}
+.np-ops__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px; p { opacity: 0.75; margin: 0; } }
+.np-ops__range { display: flex; gap: 6px; a { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--theme-elevation-200); text-decoration: none; } a.is-on { background: var(--np-yellow); color: var(--np-ink); border-color: var(--np-yellow); font-weight: 700; } }
+.np-ops__note { background: #fff6bf; color: #101418; padding: 10px 14px; border-radius: 10px; margin-bottom: 16px; }
+.np-ops__kpis { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 16px; }
+.np-ops__kpi { padding: 16px 18px; border-radius: 14px; background: var(--theme-elevation-50); border: 1px solid var(--theme-elevation-100); display: flex; flex-direction: column; gap: 4px;
+  span { opacity: 0.7; font-size: 13px; } strong { font-size: 28px; line-height: 1.1; } small { opacity: 0.7; } }
+.np-ops__grid { display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); @media (max-width: 1000px) { grid-template-columns: 1fr; } }
+.np-ops__card { padding: 18px; border-radius: 14px; border: 1px solid var(--theme-elevation-100); background: var(--theme-elevation-0); overflow-x: auto; }
+.np-ops__wide { grid-column: 1 / -1; }
+.np-ops__muted { opacity: 0.65; font-size: 13px; margin: 8px 0 0; }
+.np-ops__bars { display: flex; align-items: flex-end; gap: 3px; height: 160px; }
+.np-ops__bar { flex: 1; height: 100%; display: flex; align-items: flex-end; span { display: block; width: 100%; background: var(--np-yellow); border-radius: 4px 4px 0 0; min-height: 2px; } }
+.np-ops__cap { display: grid; grid-template-columns: repeat(14, minmax(0, 1fr)); gap: 6px; small { display: block; text-align: center; font-size: 11px; opacity: 0.7; margin-top: 4px; } }
+.np-ops__capbar { height: 110px; background: var(--theme-elevation-100); border-radius: 6px; display: flex; align-items: flex-end; overflow: hidden; span { display: block; width: 100%; } }

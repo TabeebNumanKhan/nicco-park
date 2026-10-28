@@ -1,0 +1,381 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------ */
+/*  Nicco Park tokens                                                  */
+/*  One colour per world: Dry (green), Wet (blue), Bowl (violet),      */
+/*  Snow (ice blue). Yellow is reserved for "buy" actions.             */
+/* ------------------------------------------------------------------ */
+:root {
+  --ink: #101418;
+  --ink-2: #3d4650;
+  --muted: #5b6570;
+  --subtle: #c9d0d8;
+  --line: #e3e6ea;
+  --line-2: #d5dae0;
+  --ground: #f4f5f2;
+  --night: #0a0d10;
+  --yellow: #ffd400;
+  --yellow-soft: #fff6bf;
+  --dry: #0e7c3a;
+  --dry-ink: #0b5a2b;
+  --dry-soft: #e6f7ec;
+  --wet: #0067c5;
+  --wet-ink: #00498c;
+  --wet-soft: #e3effb;
+  --bowl: #6d28d9;
+  --bowl-ink: #4b1d96;
+  --bowl-soft: #efe7fc;
+  --snow: #2f5dcc;
+  --snow-ink: #102a5c;
+  --snow-soft: #ddeeff;
+  --alert: #c4320a;
+  --alert-ink: #8a2306;
+  --alert-soft: #fdece7;
+  /* Festive accents for section backgrounds (never for 'buy', which stays yellow). */
+  --cream: #fff8e6;
+  --coral: #d93a26;
+  --coral-ink: #9c1f14;
+  --coral-soft: #ffe7e3;
+  --sky: #e8f4ff;
+  --mint: #e2f7ea;
+  --lilac: #f2ebff;
+  --sea: #007ea0;
+  --wa: #1faf5a;
+  --wa-ink: #146c3a;
+  /* Latin first; Bengali and Devanagari glyphs fall through to Hind per character. */
+  --np-sans: var(--font-instrument), var(--font-hind), var(--font-hind-deva), system-ui, sans-serif;
+  --np-display: var(--font-bricolage), var(--font-hind), var(--font-hind-deva), system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-ground: var(--ground);
+  --color-night: var(--night);
+  --color-yellow: var(--yellow);
+  --color-yellow-soft: var(--yellow-soft);
+  --color-dry: var(--dry);
+  --color-dry-ink: var(--dry-ink);
+  --color-dry-soft: var(--dry-soft);
+  --color-wet: var(--wet);
+  --color-wet-ink: var(--wet-ink);
+  --color-wet-soft: var(--wet-soft);
+  --color-bowl: var(--bowl);
+  --color-bowl-ink: var(--bowl-ink);
+  --color-bowl-soft: var(--bowl-soft);
+  --color-snow: var(--snow);
+  --color-snow-ink: var(--snow-ink);
+  --color-snow-soft: var(--snow-soft);
+  --color-alert: var(--alert);
+  --color-alert-ink: var(--alert-ink);
+  --color-alert-soft: var(--alert-soft);
+  --color-cream: var(--cream);
+  --color-coral: var(--coral);
+  --color-coral-ink: var(--coral-ink);
+  --color-coral-soft: var(--coral-soft);
+  --color-sky: var(--sky);
+  --color-mint: var(--mint);
+  --color-lilac: var(--lilac);
+  --color-sea: var(--sea);
+  --color-wa: var(--wa);
+  --color-wa-ink: var(--wa-ink);
+
+  --font-sans: var(--np-sans);
+  --font-display: var(--np-display);
+
+  --breakpoint-xs: 400px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 96px;
+  }
+  body {
+    background: #fff;
+    color: var(--ink);
+    font-family: var(--np-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  img {
+    display: block;
+    max-width: 100%;
+  }
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+  :focus-visible {
+    outline: 3px solid var(--wet);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Bengali and Hindi: Indic scripts need room for vowel signs above and below,
+   and must never be letter-spaced (it breaks conjuncts). */
+[data-lang='bn'],
+[data-lang='hi'] {
+  & :is(h1, h2, h3, .display, .h2) {
+    letter-spacing: 0 !important;
+    line-height: 1.18 !important;
+  }
+  & .eyebrow {
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  & p,
+  & li,
+  & dd,
+  & dt {
+    line-height: 1.6;
+  }
+}
+
+@layer components {
+  /* Display type: condensed Bricolage, the voice of the brand. */
+  .display {
+    font-family: var(--np-display);
+    font-weight: 800;
+    font-stretch: 80%;
+    letter-spacing: -0.02em;
+    line-height: 0.92;
+  }
+  .wrap {
+    width: 100%;
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: 16px;
+  }
+  @media (min-width: 768px) {
+    .wrap {
+      padding-inline: 24px;
+    }
+  }
+  .h2 {
+    font-family: var(--np-display);
+    font-weight: 800;
+    font-stretch: 82%;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    font-size: clamp(30px, 6vw, 56px);
+  }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  /* Horizontal swipe rail on phones, regular grid from tablet up. */
+  .rail {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 82%;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  .rail::-webkit-scrollbar,
+  .scroll-x::-webkit-scrollbar {
+    display: none;
+  }
+  .rail > * {
+    scroll-snap-align: start;
+  }
+  .scroll-x {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .scroll-x > * {
+    flex: none;
+  }
+  .ticket-notch {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border-radius: 9999px;
+    background: var(--notch, #fff);
+  }
+  /* Hero slide timer: fills while the slide is showing. */
+  .hero-progress {
+    width: 0;
+    animation-name: hero-progress;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+  @keyframes hero-progress {
+    to {
+      width: 100%;
+    }
+  }
+  /* Slow pan behind the "video" banner when there is no clip (or motion is reduced: no pan). */
+  .hero-pan {
+    animation: hero-pan 24s ease-in-out infinite alternate;
+  }
+  @keyframes hero-pan {
+    from {
+      transform: scale(1.1) translateX(-2%);
+    }
+    to {
+      transform: scale(1.2) translateX(2%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-pan {
+      animation: none;
+    }
+  }
+  /* Endless ticker. Content is duplicated once; the track slides by half. */
+  .marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 38s linear infinite;
+  }
+  .marquee:hover {
+    animation-play-state: paused;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee {
+      animation: none;
+    }
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  /* Confetti-dot texture for coloured bands (uses currentColor). */
+  .dots {
+    background-image: radial-gradient(currentColor 1.4px, transparent 1.6px);
+    background-size: 22px 22px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Section design settings (CMS → any section → Design).               */
+/* Values arrive as custom properties on the section's wrapper; these  */
+/* rules only apply when the editor changed something.                 */
+/* ------------------------------------------------------------------ */
+@layer components {
+  /* Space inside the section */
+  .np-sec[data-pt] > :not(.np-anchor) > .wrap,
+  .np-sec[data-pt] > :not(.np-anchor) > .relative > .wrap {
+    padding-top: 0 !important;
+  }
+  .np-sec[data-pt] > :not(.np-anchor) {
+    padding-top: var(--sec-pt) !important;
+  }
+  .np-sec[data-pb] > :not(.np-anchor) > .wrap,
+  .np-sec[data-pb] > :not(.np-anchor) > .relative > .wrap {
+    padding-bottom: 0 !important;
+  }
+  .np-sec[data-pb] > :not(.np-anchor) {
+    padding-bottom: var(--sec-pb) !important;
+  }
+  .np-sec[data-mb] {
+    margin-bottom: var(--sec-mb);
+  }
+  /* Content width */
+  .np-sec[data-w='narrow'] .wrap {
+    max-width: 880px !important;
+  }
+  .np-sec[data-w='wide'] .wrap {
+    max-width: 1480px !important;
+  }
+  .np-sec[data-w='full'] .wrap {
+    max-width: none !important;
+    padding-inline: clamp(16px, 3vw, 48px) !important;
+  }
+  /* Type */
+  .np-sec[data-hs] :is(h1, h2) {
+    font-size: var(--sec-hs) !important;
+    line-height: 1 !important;
+  }
+  .np-sec[data-hs]:is(:lang(bn), :lang(hi)) :is(h1, h2) {
+    line-height: 1.15 !important;
+  }
+  .np-sec[data-hf='plain'] :is(h1, h2, h3) {
+    font-family: var(--np-sans) !important;
+    font-stretch: 100% !important;
+    letter-spacing: -0.01em !important;
+  }
+  .np-sec[data-ts='s'] p {
+    font-size: 15px !important;
+  }
+  .np-sec[data-ts='l'] p {
+    font-size: clamp(18px, 1.6vw, 21px) !important;
+    line-height: 1.6 !important;
+  }
+  /* Alignment */
+  .np-sec[data-align='center'] > :not(.np-anchor) {
+    text-align: center;
+  }
+  .np-sec[data-align='center'] :is(h1, h2, h3, p, .eyebrow, [class*='max-w-']):not(:is(li, article, a, button) *) {
+    margin-inline: auto;
+  }
+  .np-sec[data-align='center'] .flex:not(:is(li, article, a, button, .flex-col) *, li, article, a, button) {
+    justify-content: center;
+  }
+  .np-sec[data-align='right'] > :not(.np-anchor) {
+    text-align: right;
+  }
+  .np-sec[data-align='right'] :is(h1, h2, h3, p, .eyebrow, [class*='max-w-']):not(:is(li, article, a, button) *) {
+    margin-left: auto;
+  }
+  .np-sec[data-align='right'] .flex:not(:is(li, article, a, button, .flex-col) *, li, article, a, button) {
+    justify-content: flex-end;
+  }
+  .np-sec[data-align='left'] > :not(.np-anchor) {
+    text-align: left;
+  }
+  /* Custom background: text follows (dark or light) */
+  .np-sec[data-bg] > :not(.np-anchor) {
+    background: var(--sec-bg) !important;
+    color: var(--sec-fg) !important;
+  }
+  .np-sec[data-bg] > :not(.np-anchor) .dots {
+    display: none;
+  }
+  .np-sec[data-bg] > :not(.np-anchor) :is(h1, h2, h3, p, .eyebrow, dt, dd):not(:is(li, article, a, button, [class*='rounded-'], [class*='bg-white']) *) {
+    color: inherit !important;
+  }
+  /* Frames */
+  .np-sec[data-frame='line'] > :not(.np-anchor) {
+    border-block: 1.5px solid var(--line);
+  }
+  .np-sec[data-frame='box'],
+  .np-sec[data-frame='shadow'] {
+    padding: clamp(8px, 2vw, 20px) clamp(12px, 3vw, 32px);
+  }
+  .np-sec[data-frame='shadow'] {
+    padding-bottom: calc(clamp(8px, 2vw, 20px) + 8px);
+    padding-right: calc(clamp(12px, 3vw, 32px) + 8px);
+  }
+  .np-sec:is([data-frame='box'], [data-frame='shadow']) > :not(.np-anchor) {
+    max-width: 1320px;
+    margin-inline: auto;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+    border-radius: clamp(20px, 3vw, 32px);
+  }
+  .np-sec[data-frame='shadow'] > :not(.np-anchor) {
+    box-shadow: 8px 8px 0 0 var(--ink);
+  }
+}
